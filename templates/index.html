@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern AKSHAY Todo App</title>
+    <title>Modern Todo App</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
@@ -18,7 +18,8 @@
                     <span class="badge-dot pulse-green"></span> Azure Storage Connected
                 </span>
                 {% else %}
-                <span class="badge badge-local" title="Azure connection string is missing. Running in local filesystem fallback mode.">
+                <span class="badge badge-local"
+                    title="Azure connection string is missing. Running in local filesystem fallback mode.">
                     <span class="badge-dot pulse-yellow"></span> Local Fallback Active
                 </span>
                 {% endif %}
@@ -30,16 +31,17 @@
         <form action="/add" method="POST" enctype="multipart/form-data" class="add-todo-form-container">
             <div class="add-todo-form">
                 <input type="text" name="title" placeholder="What needs to be done?" required autocomplete="off">
-                
+
                 <label for="image-upload" class="btn-upload" title="Attach Image">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z">
+                        </path>
                         <circle cx="12" cy="13" r="4"></circle>
                     </svg>
                 </label>
                 <input type="file" id="image-upload" name="image" accept="image/*" style="display: none;">
-                
+
                 <button type="submit" class="btn-add">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -85,13 +87,15 @@
                         {% endif %}
                     </a>
                     <span class="todo-title">{{ todo.title }}</span>
-                    
+
                     {% if todo.image_url %}
                     <div class="todo-image-container">
-                        <img src="{{ todo.image_url }}" alt="Attached Image" class="todo-thumbnail" onclick="openLightbox('{{ todo.image_url }}', '{{ todo.title | escape }}')">
+                        <img src="{{ todo.image_url }}" alt="Attached Image" class="todo-thumbnail"
+                            onclick="openLightbox('{{ todo.image_url }}', '{{ todo.title | escape }}')">
                         <a href="/delete-image/{{ todo.id }}" class="btn-delete-image" title="Delete image only">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
                                 <line x1="18" y1="6" x2="6" y2="18"></line>
                                 <line x1="6" y1="6" x2="18" y2="18"></line>
                             </svg>
@@ -146,22 +150,22 @@
         const uploadFilename = document.getElementById('upload-filename');
         const btnCancelUpload = document.getElementById('btn-cancel-upload');
 
-        imageUpload.addEventListener('change', function() {
+        imageUpload.addEventListener('change', function () {
             const file = this.files[0];
             if (file) {
                 const reader = new FileReader();
                 uploadFilename.textContent = file.name;
-                
-                reader.addEventListener('load', function() {
+
+                reader.addEventListener('load', function () {
                     uploadPreview.setAttribute('src', this.result);
                     uploadPreviewContainer.style.display = 'block';
                 });
-                
+
                 reader.readAsDataURL(file);
             }
         });
 
-        btnCancelUpload.addEventListener('click', function(e) {
+        btnCancelUpload.addEventListener('click', function (e) {
             e.preventDefault();
             imageUpload.value = '';
             uploadPreview.setAttribute('src', '#');
@@ -187,21 +191,21 @@
             document.body.style.overflow = 'auto'; // restore background scrolling
             // Reset source after animation to prevent visual glitches
             setTimeout(() => {
-                if(!lightbox.classList.contains('show')) {
+                if (!lightbox.classList.contains('show')) {
                     lightboxImg.src = '';
                 }
             }, 300);
         }
 
         // Close lightbox when clicking outside the content wrapper
-        lightbox.addEventListener('click', function(e) {
+        lightbox.addEventListener('click', function (e) {
             if (e.target === lightbox || e.target.classList.contains('lightbox-content-wrapper')) {
                 closeLightbox();
             }
         });
 
         // Close lightbox with Escape key
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && lightbox.classList.contains('show')) {
                 closeLightbox();
             }
