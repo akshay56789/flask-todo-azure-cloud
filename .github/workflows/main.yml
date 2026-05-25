@@ -29,11 +29,6 @@ jobs:
       run: |
         docker push ${{ secrets.DOCKER_USERNAME }}/flask-todo:azure
 
-    - name: Azure Login
-      uses: azure/login@v2
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-
     - name: Deploy Web App
       uses: azure/webapps-deploy@v3
       with:
