@@ -38,4 +38,5 @@ jobs:
       uses: azure/webapps-deploy@v3
       with:
         app-name: YOUR_WEBAPP_NAME
-        images: ${{ secrets.DOCKER_USERNAME }}/flask-todo:azure
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        images: ${{ secrets.DOCKER_USERNAME }}/flask-todo-app:azure
