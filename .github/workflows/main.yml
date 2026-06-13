@@ -23,11 +23,11 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/flask-todo-app:azure .
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/flask-todo-app:v3 .
 
     - name: Push image
       run: |
-        docker push ${{ secrets.DOCKER_USERNAME }}/flask-todo-app:azure
+        docker push ${{ secrets.DOCKER_USERNAME }}/flask-todo-app:v3
 
     - name: Deploy Web App
       uses: azure/webapps-deploy@v3
