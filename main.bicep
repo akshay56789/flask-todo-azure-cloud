@@ -7,13 +7,13 @@ param location string = resourceGroup().location
 param appServicePlanName string = 'akshay-plan'
 
 @description('Web App Name - must be globally unique')
-param webAppName string
+param webAppName string = 'akshaytodoapp34567'
 
 @description('Storage Account Name - lowercase only')
-param storageAccountName string
+param storageAccountName string = 'akshaystr34567'
 
 @description('SQL Server Name - globally unique')
-param sqlServerName string
+param sqlServerName string = 'akshayserver34567'
 
 @secure()
 param sqlAdminPassword string
