@@ -32,6 +32,7 @@ jobs:
     - name: Deploy Web App
       uses: azure/webapps-deploy@v3
       with:
-        app-name: akshaytodoapp34567-dev-test
+        app-name: akshaytodoapp34567
+        slot-name: dev-test
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
         images: ${{ secrets.DOCKER_USERNAME }}/flask-todo-app:v3
