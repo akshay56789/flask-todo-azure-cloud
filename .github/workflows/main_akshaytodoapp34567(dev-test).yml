@@ -23,11 +23,11 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/flask-todo-app:v3 .
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/flask-todo-app:v4 .
 
     - name: Push image
       run: |
-        docker push ${{ secrets.DOCKER_USERNAME }}/flask-todo-app:v3
+        docker push ${{ secrets.DOCKER_USERNAME }}/flask-todo-app:v4
 
     - name: Deploy Web App
       uses: azure/webapps-deploy@v3
@@ -35,4 +35,4 @@ jobs:
         app-name: akshaytodoapp34567
         slot-name: dev-test
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        images: ${{ secrets.DOCKER_USERNAME }}/flask-todo-app:v3
+        images: ${{ secrets.DOCKER_USERNAME }}/flask-todo-app:v4
