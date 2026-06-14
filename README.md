@@ -163,7 +163,7 @@ Azure SQL Database
 Connection string stored in App Service environment variables:
 
 ```
-DB_CONNECTION_STRING
+DATABASE_URL
 ```
 
 Application uses SQLAlchemy and PyODBC.
@@ -222,7 +222,7 @@ Deployment command:
 
 ```bash
 az deployment group create \
---resource-group flask-todo-rg \
+--resource-group <RESOURCE_GROUP_NAME> \
 --template-file main.bicep
 ```
 
