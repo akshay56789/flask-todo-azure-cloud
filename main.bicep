@@ -28,16 +28,16 @@ param dockerImage string = 'akshay34567/flask-todo-app:v3'
 @secure()
 param blobConnectionString string
 
-@description('Database connection string')
+@description('ODBC connection string for Azure SQL Database')
 @secure()
-param dbConnectionString string
+param odbcConnectionString string = 'Driver={ODBC Driver 17 for SQL Server};Server=tcp:akshayserver34567.database.windows.net,1433;Database=akshaydb;Uid=sqladmin@akshayserver34567;Pwd={sqlAdminPassword};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
 
 resource appPlan 'Microsoft.Web/serverfarms@2023-12-01' = {
   name: appServicePlanName
   location: location
   sku: {
-    name: 'B1'
-    tier: 'Basic'
+    name: 'S1'
+    tier: 'Standard'
   }
   kind: 'linux'
   properties: {
@@ -87,6 +87,35 @@ resource webApp 'Microsoft.Web/sites@2023-12-01' = {
   properties: {
     serverFarmId: appPlan.id
 
+    siteConfig: {
+      linuxFxVersion: 'DOCKER|${dockerImage}'
+      appSettings: [
+        {
+          name: 'WEBSITES_PORT'
+          value: '5000'
+        }
+        {
+          name: 'AZURE_STORAGE_CONNECTION_STRING'
+          value: blobConnectionString
+        }
+        {
+          name: 'DB_CONNECTION_STRING'
+          value: dbConnectionString
+        }
+        {
+          name: 'WEBSITES_ENABLE_APP_SERVICE_STORAGE'
+          value: 'false'
+        }
+      ]
+    }
+  }
+}
+
+// Dev slot (staging/testing)
+resource devSlot 'Microsoft.Web/sites/slots@2023-12-01' = {
+  name: '${webApp.name}/dev'
+  location: location
+  properties: {
     siteConfig: {
       linuxFxVersion: 'DOCKER|${dockerImage}'
       appSettings: [
