@@ -100,7 +100,7 @@ resource webApp 'Microsoft.Web/sites@2023-12-01' = {
         }
         {
           name: 'DB_CONNECTION_STRING'
-          value: dbConnectionString
+          value: odbcConnectionString
         }
         {
           name: 'WEBSITES_ENABLE_APP_SERVICE_STORAGE'
@@ -129,7 +129,7 @@ resource devSlot 'Microsoft.Web/sites/slots@2023-12-01' = {
         }
         {
           name: 'DB_CONNECTION_STRING'
-          value: dbConnectionString
+          value: odbcConnectionString
         }
         {
           name: 'WEBSITES_ENABLE_APP_SERVICE_STORAGE'
