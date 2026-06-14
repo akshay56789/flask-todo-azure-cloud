@@ -30,7 +30,7 @@ param blobConnectionString string
 
 @description('ODBC connection string for Azure SQL Database')
 @secure()
-param odbcConnectionString string = 'Driver={ODBC Driver 17 for SQL Server};Server=tcp:akshayserver34567.database.windows.net,1433;Database=akshaydb;Uid=sqladmin@akshayserver34567;Pwd={sqlAdminPassword};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
+param odbcConnectionString string = 'Driver={ODBC Driver 18 for SQL Server};Server=tcp:akshayserver34567.database.windows.net,1433;Database=akshaydb;Uid=sqladmin@akshayserver34567;Pwd={sqlAdminPassword};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
 
 resource appPlan 'Microsoft.Web/serverfarms@2023-12-01' = {
   name: appServicePlanName
@@ -99,7 +99,7 @@ resource webApp 'Microsoft.Web/sites@2023-12-01' = {
           value: blobConnectionString
         }
         {
-          name: 'DB_CONNECTION_STRING'
+          name: 'DATABASE_URL'
           value: odbcConnectionString
         }
         {
@@ -128,7 +128,7 @@ resource devSlot 'Microsoft.Web/sites/slots@2023-12-01' = {
           value: blobConnectionString
         }
         {
-          name: 'DB_CONNECTION_STRING'
+          name: 'DATABASE_URL'
           value: odbcConnectionString
         }
         {
