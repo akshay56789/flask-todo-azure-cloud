@@ -9,9 +9,15 @@ pipeline {
             }
         }
 
-        stage('Docker Version') {
+        stage('Show Files') {
             steps {
-                sh 'docker --version'
+                sh 'ls -la'
+            }
+        }
+
+        stage('Show Python') {
+            steps {
+                sh 'python3 --version'
             }
         }
     }
