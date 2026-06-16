@@ -2,15 +2,25 @@ pipeline {
     agent any
 
     stages {
-        stage('Docker Version') {
+
+        stage('Checkout') {
             steps {
-                sh 'docker --version'
+                checkout scm
             }
         }
 
-        stage('Docker PS') {
+        stage('Build Docker Image') {
             steps {
-                sh 'docker ps'
+                sh 'docker build -t flask-todo:${BUILD_NUMBER} .'
+            }
+        }
+
+        stage('Run Container') {
+            steps {
+                sh '''
+                docker run -d --name flask-test-${BUILD_NUMBER} \
+                flask-todo:${BUILD_NUMBER}
+                '''
             }
         }
     }
