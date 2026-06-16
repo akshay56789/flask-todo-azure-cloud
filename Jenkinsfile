@@ -3,21 +3,12 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
+        stage('Environment') {
             steps {
-                checkout scm
-            }
-        }
-
-        stage('Show Files') {
-            steps {
-                sh 'ls -la'
-            }
-        }
-
-        stage('Show Python') {
-            steps {
-                sh 'python3 --version'
+                sh 'whoami'
+                sh 'hostname'
+                sh 'java -version'
+                sh 'git --version'
             }
         }
     }
