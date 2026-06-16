@@ -2,13 +2,9 @@ pipeline {
     agent any
 
     stages {
-
-        stage('Environment') {
+        stage('Docker Version') {
             steps {
-                sh 'whoami'
-                sh 'hostname'
-                sh 'java -version'
-                sh 'git --version'
+                sh 'docker --version'
             }
         }
     }
