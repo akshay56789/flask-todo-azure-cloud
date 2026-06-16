@@ -2,17 +2,17 @@ pipeline {
     agent any
 
     stages {
-
-        stage('Checkout') {
+        stage('Docker Version') {
             steps {
-                checkout scm
+                sh 'docker --version'
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Docker PS') {
             steps {
-                sh 'docker build -t flask-todo:${BUILD_NUMBER} .'
+                sh 'docker ps'
             }
         }
     }
+}
 }
