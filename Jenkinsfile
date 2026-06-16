@@ -9,10 +9,9 @@ pipeline {
             }
         }
 
-        stage('List Files') {
+        stage('Docker Version') {
             steps {
-                sh 'pwd'
-                sh 'ls -la'
+                sh 'docker --version'
             }
         }
     }
