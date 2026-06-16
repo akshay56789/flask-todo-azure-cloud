@@ -18,8 +18,8 @@ pipeline {
         stage('Run Container') {
             steps {
                 sh '''
-                docker run -d --name flask-test-${BUILD_NUMBER} \
-                flask-todo:${BUILD_NUMBER}
+                docker rm -f flask-test || true
+                docker run -d -p 5000:5000 --name flask-test flask-todo:${BUILD_NUMBER}
                 '''
             }
         }
